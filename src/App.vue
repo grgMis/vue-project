@@ -1,15 +1,23 @@
 <template>
 	<div class="app">
-		<h1>First commit</h1>
+		<Navbar></Navbar>
 	</div>
 </template>
 
 <script>
-export default {
+import Navbar from './components/UI/Navbar.vue';
 
+export default {
+    components: {
+		Navbar
+	}
 }
 </script>
 
 <style>
+
+ * {
+	margin: 0px;
+ }
 
 </style>
