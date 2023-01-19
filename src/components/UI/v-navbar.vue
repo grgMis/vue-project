@@ -1,20 +1,22 @@
 <template>
 	<div class="navbar">
-		<div>Main Page</div>
+		<div class="header">Текущее оборудование</div>
 		<div class="navbar__btns">
-			<Button>Btn1</Button>
-			<Button>Btn1</Button>
+			<vButton>Btn1</vButton>
+			<vButton>Btn2</vButton>
 		</div>
 	</div>
 </template>
 
 <script>
-import Button from './Button.vue';
+import vButton from './v-button.vue';
 
 export default {
+	name: 'vNavbar',
+
     components: {
-		Button
-	}
+		vButton
+	},
 }
 </script>
 
@@ -22,7 +24,7 @@ export default {
 
 .navbar {
 	height: 50px;
-	background-color: gainsboro;
+	background-color: #65A5D1;
 	box-shadow: 2px 2px 4px black;
 	display: flex;
 	align-items: center;
@@ -31,5 +33,12 @@ export default {
 
 .navbar__btns {
 	margin-left: auto;
+}
+
+.header {
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+	text-shadow: 2px 2px 4px black;
 }
 </style>

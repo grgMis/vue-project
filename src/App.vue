@@ -1,15 +1,15 @@
 <template>
 	<div class="app">
-		<Navbar></Navbar>
+		<vNavbar></vNavbar>
+		<RouterView></RouterView>
 	</div>
 </template>
 
 <script>
-import Navbar from './components/UI/Navbar.vue';
-
+import vNavbar from '@/components/UI/v-navbar.vue'
 export default {
-    components: {
-		Navbar
+	components: {
+		vNavbar
 	}
 }
 </script>
@@ -18,6 +18,14 @@ export default {
 
  * {
 	margin: 0px;
+ }
+
+ .table {
+	border: 1px solid black;
+ }
+
+ .columns {
+	border: 1px solid black;
  }
 
 </style>
