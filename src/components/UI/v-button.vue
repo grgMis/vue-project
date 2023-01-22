@@ -17,8 +17,8 @@ export default {
 	margin: 10px;
 	background: none;
 	color: gainsboro;
-	border: 1px solid black;
-	color: black;
+	border: 1px solid white;
+	color: white;
 }
 
 </style>

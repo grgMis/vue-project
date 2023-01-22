@@ -1,0 +1,123 @@
+<template>
+	<div class="action__equip__form">
+		<form class="form">
+			<vInput name="equipCount" placeholder="Количество оборудования"
+				v-model="dataOneActionEquip.equip_count"
+				@input="(dataActionEquip.equip_count = $event.target.value)">
+			</vInput>
+			<vInput name="equipDateEntry" type="date" placeholder="Дата"
+				v-model="dataOneActionEquip.equip_date_entry"
+				@input="(dataActionEquip.equip_date_entry = $event.target.value)">
+			</vInput>
+			<vInput name="equipDepthBegin" placeholder="Начальная глубина"
+				v-model="dataOneActionEquip.equip_depth_begin"
+				@input="(dataActionEquip.equip_depth_begin = $event.target.value)">
+			</vInput>
+			<vInput name="equipDepthEnd" placeholder="Конечная глубина"
+				v-model="dataOneActionEquip.equip_depth_end"
+				@input="(dataActionEquip.equip_depth_end = $event.target.value)">
+			</vInput>
+			<vInput name="equipNo" placeholder="Номер слота"
+				v-model="dataOneActionEquip.equip_no"
+				@input="(dataActionEquip.equip_no = $event.target.value)">
+			</vInput>
+			<vButton class="btn__add" @click="updateActionEquip(this.idActionEquip)">Редактировать</vButton>
+		</form>
+	</div>
+</template>
+
+<script>
+import axios from 'axios'
+import vSelect from '@/components/UI/v-select.vue'
+import vInput from '@/components/UI/v-input.vue'
+import vButton from '@/components/UI/v-button.vue'
+
+export default {
+	name: 'ActionEquipDataForm',
+	components: {
+		vSelect,
+		vInput,
+		vButton
+	},
+	props: {
+		idActionEquip: {
+			type: Number,
+		}
+	},
+	data() {
+		return {
+			actionEquipList: [],
+			dataActionEquip:
+			{
+				equip_count: 0,
+				equip_date_entry: "",
+				equip_depth_begin: 0,
+				equip_depth_end: 0,
+				equip_no: 0
+			},
+			dataOneActionEquip: []
+			// {
+			// 	action_oper_id: 0,
+			// 	equip_date_entry: "",
+			// 	equip_class_id: 0,
+			// 	equip_model_id: 0,
+			// 	equip_id: 0,
+			// 	equip_no: 0,
+			// 	equip_state_id: 0,
+			// 	equip_depth_begin: 0,
+			// 	equip_depth_end: 0,
+			// 	equip_count: 0
+			// }
+		}
+	},
+	methods: {
+		async getActionEquipData(idActionEquip) {
+			try {
+				const response = await axios.get('http://localhost:8081/actionEquip/'+idActionEquip);
+				this.dataOneActionEquip = response.data;
+				console.log(this.dataOneActionEquip);
+			} catch(e) {
+				console.log('Error');
+			}
+		},
+		async updateActionEquip(idActionEquip) {
+			try {
+				const response = await axios.put('http://localhost:8081/actionEquip/'+idActionEquip, this.dataActionEquip);
+				alert('Запись успешно изменена');
+			} catch(e) {
+				alert('Заполните поля для изменения!');
+				console.log('Error');
+			}
+		},
+	},
+	mounted() {
+		this.getActionEquipData(this.idActionEquip);
+	}
+}
+</script>
+
+
+<style scoped>
+* {
+	font-family: Arial, Helvetica, sans-serif
+}
+
+select {
+	width: 160px;
+	border: 1px solid black;
+	padding: 10px 15px;
+	margin-top: 15px;
+	margin: 10px;
+	font-weight: bold;
+}
+
+.btn__add {
+	margin-top: 20px;
+	color: black;
+	border: 1px solid black;
+}
+
+.form {
+	margin-top: 30px;
+}
+</style>
