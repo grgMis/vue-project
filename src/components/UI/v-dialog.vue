@@ -2,8 +2,8 @@
 	<div class="dialog" v-if="show">
 		<div class="dialog__content">
 			<VButton class="btn" 
-				v-b-tooltip.hover title="Закрыть окно" 
-				@click="hideDialog">X</VButton>
+			v-b-tooltip.hover title="Закрыть окно" 
+			@click="hideDialog">X</VButton>
 			<slot></slot>
 		</div>
 	</div>
@@ -35,6 +35,7 @@ export default {
 	bottom: 0;
 	right: 0;
 	left: 0;
+	width: auto;
 	background: rgba(0, 0, 0, 0.5);
 	position: fixed;
 	display: flex; 
@@ -44,14 +45,14 @@ export default {
 	margin: auto;
 	background: white;
 	border-radius: 12px;
-	width: 500px;
+	width: 600px;
 	padding: 20px;
 	text-align: center;
 }
 
 .btn {
 	position: absolute;
-	margin-left: 210px;
+	margin-left: 250px;
 	margin-top: -5px;
 	color: black;
 	border: 1px solid black;

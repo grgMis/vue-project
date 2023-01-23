@@ -1,22 +1,27 @@
 <template>
 	<div class="action__equip__form">
 		<form class="form">
+			<h4>Количество оборудования</h4>
 			<vInput name="equipCount" placeholder="Количество оборудования"
 				v-model="dataOneActionEquip.equip_count"
 				@input="(dataActionEquip.equip_count = $event.target.value)">
 			</vInput>
+			<h4>Дата добавления</h4>
 			<vInput name="equipDateEntry" type="date" placeholder="Дата"
 				v-model="dataOneActionEquip.equip_date_entry"
 				@input="(dataActionEquip.equip_date_entry = $event.target.value)">
 			</vInput>
+			<h4>Начальная глубина</h4>
 			<vInput name="equipDepthBegin" placeholder="Начальная глубина"
 				v-model="dataOneActionEquip.equip_depth_begin"
 				@input="(dataActionEquip.equip_depth_begin = $event.target.value)">
 			</vInput>
+			<h4>Конечная глубина</h4>
 			<vInput name="equipDepthEnd" placeholder="Конечная глубина"
 				v-model="dataOneActionEquip.equip_depth_end"
 				@input="(dataActionEquip.equip_depth_end = $event.target.value)">
 			</vInput>
+			<h4>Номер оборудования</h4>
 			<vInput name="equipNo" placeholder="Номер слота"
 				v-model="dataOneActionEquip.equip_no"
 				@input="(dataActionEquip.equip_no = $event.target.value)">
@@ -56,18 +61,6 @@ export default {
 				equip_no: 0
 			},
 			dataOneActionEquip: []
-			// {
-			// 	action_oper_id: 0,
-			// 	equip_date_entry: "",
-			// 	equip_class_id: 0,
-			// 	equip_model_id: 0,
-			// 	equip_id: 0,
-			// 	equip_no: 0,
-			// 	equip_state_id: 0,
-			// 	equip_depth_begin: 0,
-			// 	equip_depth_end: 0,
-			// 	equip_count: 0
-			// }
 		}
 	},
 	methods: {
@@ -119,5 +112,10 @@ select {
 
 .form {
 	margin-top: 30px;
+}
+
+input {
+	margin-top: 5px;
+	margin-bottom: 20px;
 }
 </style>

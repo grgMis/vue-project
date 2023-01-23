@@ -1,6 +1,6 @@
 <template>
 	<div class="action__equip__form">
-		<form>
+		<form class="form">
 			<select name="actionOper"
 				v-model="selectedActionOper"
 				@change="this.actionOperId=$event.target.options.selectedIndex">
@@ -186,13 +186,19 @@ select {
 	border: 1px solid black;
 	padding: 10px 15px;
 	margin-top: 15px;
+	margin-right: 30px;
 	margin: 10px;
 	font-weight: bold;
 }
 
 .btn__add {
 	margin-top: 20px;
+	margin-left: 30px;
 	color: black;
 	border: 1px solid black;
+}
+
+.form {
+	margin-top: 40px;
 }
 </style>
