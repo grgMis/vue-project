@@ -1,6 +1,46 @@
 <template>
 	<div class="action__equip__form">
 		<form class="form">
+			<select name="actionOper"
+				v-model="selectedActionOper"
+				@change="this.actionOperId=$event.target.options.selectedIndex">
+					<option disabled value="">Дата операции</option>
+					<option v-for="actionOper in actionOperList" :key="actionOper.action_oper_id">
+						{{ actionOper.action_oper_date }}
+					</option>
+			</select>
+			<select name="equipClass"
+				v-model="selectedEquipClass"
+				@change="this.equipClassId=$event.target.options.selectedIndex">
+					<option disabled value="">Класс</option>
+					<option v-for="equipClass in equipClassList" :key="equipClass.equip_class_id">
+						{{ equipClass.equip_class_name }}
+					</option>
+			</select>
+			<select name="equipModel" 
+				v-model="selectedEquipModel" 
+				@change="this.equipModelId=$event.target.options.selectedIndex">
+					<option disabled value="">Модель</option>
+					<option v-for="equipModel in equipModelList" :key="equipModel.equip_model_id">
+						{{ equipModel.equip_model_name }}
+					</option>
+			</select>
+			<select name="equipNumber"
+				v-model="selectedEquipNumber" 
+				@change="this.equipId=$event.target.options.selectedIndex">
+					<option disabled value="">Инв. номер</option>
+					<option v-for="equip in equipList" :key="equip.equip_id">
+						{{ equip.inventory_number }}
+					</option>
+			</select>
+			<select name="equipState"
+				v-model="selectedEquipState" 
+				@change="this.equipStateId=$event.target.options.selectedIndex">
+					<option disabled value="">Состояние</option>
+					<option v-for="equipState in equipStateList" :key="equipState.equip_state_id">
+						{{ equipState.equip_state_name }}
+					</option>	
+			</select>
 			<h4>Количество оборудования</h4>
 			<vInput name="equipCount" placeholder="Количество оборудования"
 				v-model="dataOneActionEquip.equip_count"

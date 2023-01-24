@@ -62,6 +62,18 @@
 			<VButton class="btns">
 				<RouterLink to="/actionEquip">Action Equipment</RouterLink>
 			</VButton>
+			<VButton class="btns">
+				<RouterLink to="/equip">Equipment</RouterLink>
+			</VButton>
+			<VButton class="btns">
+				<RouterLink to="/well">Well</RouterLink>
+			</VButton>
+			<VButton class="btns">
+				<RouterLink to="/action">Action</RouterLink>
+			</VButton>
+			<VButton class="btns">
+				<RouterLink to="/actionOper">Action Oper</RouterLink>
+			</VButton>
 			<VButton class="btns" @click="showActionForm">Action</VButton>
 			<VButton class="btns" @click="showActionGroupForm">Action Group</VButton>
 			<VButton class="btns" @click="showActionTypeForm">Action Type</VButton>

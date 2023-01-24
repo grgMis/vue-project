@@ -1,7 +1,7 @@
 <template>
 	<div class="well__form">
 		<form class="form">
-			<table cellpadding="0" cellspacing="0">
+			<table class="table" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
 						<th>Наименование скважины</th>
@@ -9,7 +9,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="well in wellList" :key="well.dept_id">
+					<tr v-for="well in wellList" :key="well.well_id">
 						<td>{{ well.well_name }}</td>
 						<td>{{ well.dept_id.dept_name}}</td>
 					</tr>
@@ -102,25 +102,9 @@ margin: 0px;
 font-family: Arial, Helvetica, sans-serif;
 }
 
-th {
-text-align: center;
-border: 1px solid black;
-padding: 5px;
-margin: 5px;
-font-size: 20px;
-}
-
-td {
-text-align: center;
-border: 1px solid black;
-padding: 5px;
-margin: 5px;
-font-size: 20px;
-}
-
 table {
 padding: 5px;
-margin-left: 45px;
+margin-left: 90px;
 max-width: auto;
 }
 
@@ -131,6 +115,19 @@ select {
 	margin-top: 15px;
 	margin: 10px;
 	font-weight: bold;
+}
+
+.table th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+	text-align: center;
+	font-size: 15px;
 }
 
 .btns {

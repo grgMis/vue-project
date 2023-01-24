@@ -3,6 +3,7 @@
 		<ActionEquipForm></ActionEquipForm>
 	</vDialog>
 	<div class="navbar">
+		<vButton class="btn" v-b-tooltip.hover title="Главная" @click="goToMain">◄</vButton>
 		<div class="header">Текущее оборудование</div>
 		<div class="navbar__btns">
 			<vButton v-b-tooltip.hover title="Создать запись"
@@ -16,6 +17,7 @@
 import vButton from './v-button.vue';
 import vDialog from '@/components/UI/v-dialog.vue'
 import ActionEquipForm from '@/components/ActionEquipForm.vue';
+import router from '@/router/router';
 
 export default {
 	components: {
@@ -32,6 +34,9 @@ export default {
 	methods: {
 		showDialog() {
 			this.dialogVisible = true;
+		},
+		goToMain() {
+			router.push('/')
 		}
 	}
 }
@@ -62,4 +67,10 @@ export default {
 	font-size: 20px;
 	color: white;
 }
+
+.btn {
+	font-weight: bold;
+	font-size: 15px;
+}
+
 </style>

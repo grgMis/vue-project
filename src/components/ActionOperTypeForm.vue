@@ -1,7 +1,7 @@
 <template>
 	<div class="action__oper__type__form">
 		<form class="form">
-			<table cellpadding="0" cellspacing="0">
+			<table class="table" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
 						<th>Наименование типа действия операции</th>
@@ -107,6 +107,19 @@ select {
 	margin-top: 15px;
 	margin: 10px;
 	font-weight: bold;
+}
+
+.table th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+	text-align: center;
+	font-size: 15px;
 }
 
 .btns {
