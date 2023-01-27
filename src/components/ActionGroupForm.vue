@@ -21,7 +21,7 @@
 			<vInput name="actionEquipSname" placeholder="Краткое наименование группы события"
 				 @input="(dataActionGroup.action_group_sname = $event.target.value)">
 			</vInput>
-			<VButton class="btn__add" @click="addActionGroup">Создать группу события</VButton>
+			<VButton type="button" class="btn__add" @click="addActionGroup">Создать группу события</VButton>
 		</form>
 	</div>
 </template>
@@ -57,6 +57,7 @@ export default {
 			try {
 				const response = await axios.post('http://localhost:8081/actionGroup', this.dataActionGroup);
 				alert('Запись успешно сохранена');
+				this.loadActionGroupList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

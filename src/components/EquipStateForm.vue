@@ -21,7 +21,7 @@
 			<vInput name="equipStateSname" placeholder="Краткое наименование состояния оборудования"
 				 @input="(dataEquipState.equip_state_sname = $event.target.value)">
 			</vInput>
-			<VButton class="btn__add" @click="addEquipState">Добавить состояние оборудования</VButton>
+			<VButton type="button" class="btn__add" @click="addEquipState">Добавить состояние оборудования</VButton>
 		</form>
 	</div>
 </template>
@@ -57,6 +57,7 @@ export default {
 			try {
 				const response = await axios.post('http://localhost:8081/equipState', this.dataEquipState);
 				alert('Запись успешно сохранена');
+				this.loadEquipStateList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

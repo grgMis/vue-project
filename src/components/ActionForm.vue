@@ -7,7 +7,6 @@
 						<th>Дата начала события</th>
 						<th>Дата окончания события</th>
 						<th>Наименование типа события</th>
-						<th>Наименование скважины</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -15,7 +14,6 @@
 						<td>{{ action.action_date_begin }}</td>
 						<td>{{ action.action_date_end }}</td>
 						<td>{{ action.action_type_id.action_type_name }}</td>
-						<td>{{ action.well_id.well_name }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -33,15 +31,7 @@
 						{{ actionType.action_type_name }}
 					</option>
 			</select>
-			<select name="well"
-				v-model="selectedWell" 
-				@change="this.wellId=$event.target.options.selectedIndex">
-					<option disabled value="">Наименование скважины</option>
-					<option v-for="well in wellList" :key="well.well_id">
-						{{ well.well_name }}
-					</option>
-			</select>
-			<VButton class="btn__add" @click="addAction">Создать событие</VButton>
+			<VButton type="button" class="btn__add" @click="addAction">Создать событие</VButton>
 		</form>
 	</div>
 </template>
@@ -57,10 +47,7 @@ export default {
 		return {
 			selectedActionType: "",
 			actionTypeId: 0,
-			selectedWell: "",
-			wellId: 0,
 			actionList: [],
-			wellList: [],
 			actionTypeList: [],
 			dataAction: 
 			{
@@ -79,15 +66,6 @@ export default {
 				console.log('Error');
 			}
 		},
-		async loadWellList() {
-			try {
-				const response = await axios.get('http://localhost:8081/well/wellAll');
-				this.wellList = response.data;
-				console.log(this.wellList);
-			} catch(e) {
-				console.log('Error');
-			}
-		},
 		async loadActionTypeList() {
 			try {
 				const response = await axios.get("http://localhost:8081/actionType/actionTypeAll");
@@ -102,11 +80,11 @@ export default {
 				const response = await axios.post('http://localhost:8081/action', this.dataAction, {
 					params: 
 					{
-						action_type_id: this.actionTypeId,
-						well_id: this.wellId,
+						action_type_id: this.actionTypeId
 					}
 				});
 				alert('Запись успешно сохранена');
+				this.loadActionList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');
@@ -115,7 +93,6 @@ export default {
 	},
 	mounted() {
 		this.loadActionList();
-		this.loadWellList();
 		this.loadActionTypeList();
 	},
 	components: {

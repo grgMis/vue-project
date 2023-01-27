@@ -31,7 +31,7 @@
 						{{ equipClass.equip_class_name }}
 					</option>
 			</select>
-			<VButton class="btn__add" @click="addEquipModel">Добавить модель оборудования</VButton>
+			<VButton type="button" class="btn__add" @click="addEquipModel">Добавить модель оборудования</VButton>
 		</form>
 	</div>
 </template>
@@ -84,6 +84,7 @@ export default {
 					}
 				});
 				alert('Запись успешно сохранена');
+				this.loadEquipModelList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

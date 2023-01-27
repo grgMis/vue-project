@@ -16,7 +16,7 @@
 			<vInput name="hangerTypeName" placeholder="Наименование типа подвески"
 				 @input="(dataHangerType.hanger_type_name = $event.target.value)">
 			</vInput>
-			<VButton class="btn__add" @click="addHangerType">Создать тип подвески</VButton>
+			<VButton type="button" class="btn__add" @click="addHangerType">Создать тип подвески</VButton>
 		</form>
 	</div>
 </template>
@@ -51,6 +51,7 @@ export default {
 			try {
 				const response = await axios.post('http://localhost:8081/hangerType', this.dataHangerType);
 				alert('Запись успешно сохранена');
+				this.loadHangerType();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

@@ -55,44 +55,51 @@
 		<h4>Equip</h4>
 		<EquipForm></EquipForm>
 	</VDialog>
+	<VDialog v-model:show="visibleWellEquip">
+		<h4>Well Equip</h4>
+		<WellEquipForm></WellEquipForm>
+	</VDialog>
+	<VDialog v-model:show="visibleUserData">
+		<h4>User Data</h4>
+		<UserDataForm></UserDataForm>
+	</VDialog>
 	<div class="app">
 		<h1>Добро пожаловать!</h1>
 		<h2>Выберите таблицу для взаимодействия</h2>
 		<div class="links">
+			<VButton class="btns" @click="goToActionEquip">Текущий ремонт</VButton>
+			<VButton class="btns" @click="goToWellEquip">Оборудование скважин</VButton>
 			<VButton class="btns">
-				<RouterLink to="/actionEquip">Action Equipment</RouterLink>
+				<RouterLink to="/well">СкважиныTEST</RouterLink>
 			</VButton>
 			<VButton class="btns">
-				<RouterLink to="/equip">Equipment</RouterLink>
+				<RouterLink to="/action">ДействияTEST</RouterLink>
 			</VButton>
 			<VButton class="btns">
-				<RouterLink to="/well">Well</RouterLink>
+				<RouterLink to="/actionOper">ОперацииTEST</RouterLink>
 			</VButton>
-			<VButton class="btns">
-				<RouterLink to="/action">Action</RouterLink>
-			</VButton>
-			<VButton class="btns">
-				<RouterLink to="/actionOper">Action Oper</RouterLink>
-			</VButton>
-			<VButton class="btns" @click="showActionForm">Action</VButton>
-			<VButton class="btns" @click="showActionGroupForm">Action Group</VButton>
-			<VButton class="btns" @click="showActionTypeForm">Action Type</VButton>
-			<VButton class="btns" @click="showActionOperTypeForm">Action Oper Type</VButton>
-			<VButton class="btns" @click="showActionOperForm">Action Oper</VButton>
-			<VButton class="btns" @click="showDeptTypeForm">Dept Type</VButton>
-			<VButton class="btns" @click="showDeptForm">Dept</VButton>
-			<VButton class="btns" @click="showEquipStateForm">Equip State</VButton>
-			<VButton class="btns" @click="showEquipCategoryForm">Equip Category</VButton>
-			<VButton class="btns" @click="showEquipClassForm">Equip Class</VButton>
-			<VButton class="btns" @click="showEquipModelForm">Equip Model</VButton>
-			<VButton class="btns" @click="showEquipForm">Equip</VButton>
-			<VButton class="btns" @click="showWellForm">Well</VButton>
-			<VButton class="btns" @click="showHangerTypeForm">Hanger Type</VButton>
+			<VButton class="btns" @click="showActionForm">Действия[C]</VButton>
+			<VButton class="btns" @click="showActionGroupForm">Группы действий[C]</VButton>
+			<VButton class="btns" @click="showActionTypeForm">Типы действий[C]</VButton>
+			<VButton class="btns" @click="showActionOperTypeForm">Виды операций[C]</VButton>
+			<VButton class="btns" @click="showActionOperForm">Операции[C]</VButton>
+			<VButton class="btns" @click="showDeptTypeForm">Типы подразделений[C]</VButton>
+			<VButton class="btns" @click="showDeptForm">Подразделения[C]</VButton>
+			<VButton class="btns" @click="showEquipStateForm">Состояния оборудования[C]</VButton>
+			<VButton class="btns" @click="showEquipCategoryForm">Категории оборудования[C]</VButton>
+			<VButton class="btns" @click="showEquipClassForm">Классы оборудования[C]</VButton>
+			<VButton class="btns" @click="showEquipModelForm">Модели оборудования[C]</VButton>
+			<VButton class="btns" @click="showEquipForm">Оборудование[C]</VButton>
+			<VButton class="btns" @click="showWellForm">Скважины[C]</VButton>
+			<VButton class="btns" @click="showHangerTypeForm">Типы подвесок[C]</VButton>
+			<VButton class="btns" @click="showWellEquipForm">Оборудование скважин[C]</VButton>
+			<VButton class="btns" @click="showUserDataForm">Пользователи[C]</VButton>
 		</div>
 	</div>
 </template>
 
 <script>
+import router from '@/router/router';
 import VButton from '@/components/UI/v-button.vue';
 import ActionGroupForm from '@/components/ActionGroupForm.vue';
 import ActionTypeForm from '@/components/ActionTypeForm.vue';
@@ -109,26 +116,30 @@ import EquipClassForm from '@/components/EquipClassForm.vue';
 import EquipModelForm from '@/components/EquipModelForm.vue';
 import EquipForm from '@/components/EquipForm.vue';
 import VDialog from '@/components/UI/v-dialog.vue';
+import WellEquipForm from '@/components/WellEquipForm.vue';
+import UserDataForm from '@/components/UserDataForm.vue';
 
 
 export default {
     components: {
-		VButton,
-		ActionGroupForm,
-		ActionTypeForm,
-		DeptTypeForm,
-		DeptForm,
-		WellForm,
-		ActionForm,
-		ActionOperTypeForm,
-		ActionOperForm,
-		HangerTypeForm,
-		EquipStateForm,
-		EquipCategoryForm,
-		EquipClassForm,
-		EquipModelForm,
-		EquipForm,
-		VDialog
+    VButton,
+    ActionGroupForm,
+    ActionTypeForm,
+    DeptTypeForm,
+    DeptForm,
+    WellForm,
+    ActionForm,
+    ActionOperTypeForm,
+    ActionOperForm,
+    HangerTypeForm,
+    EquipStateForm,
+    EquipCategoryForm,
+    EquipClassForm,
+    EquipModelForm,
+    EquipForm,
+    VDialog,
+    WellEquipForm,
+    UserDataForm
 },
 	data() {
 		return {
@@ -145,10 +156,18 @@ export default {
 			visibleEquipCategoryForm: false,
 			visibleEquipClassForm: false,
 			visibleEquipModelForm: false,
-			visibleEquipForm: false
+			visibleEquipForm: false,
+			visibleWellEquip: false,
+			visibleUserData: false
 		}
 	},
 	methods: {
+		goToActionEquip() {
+			router.push('/actionEquip');
+		},
+		goToWellEquip() {
+			router.push('/wellEquip');
+		},
 		showActionGroupForm() {
 			this.visibleActionGroupForm = true;
 		},
@@ -191,6 +210,12 @@ export default {
 		showEquipForm() {
 			this.visibleEquipForm = true;
 		},
+		showWellEquipForm() {
+			this.visibleWellEquip = true;
+		},
+		showUserDataForm() {
+			this.visibleUserData = true;
+		},
 	}
 }
 </script>
@@ -218,6 +243,7 @@ h4 {
 .btns {
 	color: black;
 	border: 1px solid black;
+	cursor: pointer;
 }
 
 </style>

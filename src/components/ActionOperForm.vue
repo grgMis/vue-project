@@ -6,6 +6,7 @@
 					<tr>
 						<th>Дата действия операции</th>
 						<th>Дата окончания операции</th>
+						<th>Наименование операции</th>
 						<th>Наименование типа действия операции</th>
 						<th>Наименование типа подвески</th>
 					</tr>
@@ -14,6 +15,7 @@
 					<tr v-for="actionOper in actionOperList" :key="actionOper.action_oper_id">
 						<td>{{ actionOper.action_oper_date }}</td>
 						<td>{{ actionOper.action_id.action_date_end }}</td>
+						<td>{{ actionOper.action_id.action_type_id.action_type_name}}</td>
 						<td>{{ actionOper.action_oper_type_id.action_oper_type_name }}</td>
 						<td>{{ actionOper.hanger_type_id.hanger_type_name}}</td>
 					</tr>
@@ -25,15 +27,15 @@
 			<select name="action"
 				v-model="selectedAction" 
 				@change="this.actionId=$event.target.options.selectedIndex">
-					<option disabled value="">Дата окончания операции</option>
+					<option disabled value="">Наименование операции</option>
 					<option v-for="action in actionList" :key="action.action_id">
-						{{ action.action_date_end }}
+						{{ action.action_type_id.action_type_name }}
 					</option>
 			</select>
 			<select name="actionOperType"
 				v-model="selectedActionOperType" 
 				@change="this.actionOperTypeId=$event.target.options.selectedIndex">
-					<option disabled value="">Наименование типа действия операции</option>
+					<option disabled value="">Наименование группы операции</option>
 					<option v-for="actionOperType in actionOperTypeList" :key="actionOperType.action_oper_type_id">
 						{{ actionOperType.action_oper_type_name }}
 					</option>
@@ -46,7 +48,7 @@
 						{{ hangerType.hanger_type_name }}
 					</option>
 			</select>
-			<VButton class="btn__add" @click="addActionOperList">Создать действие операции</VButton>
+			<VButton type="button" class="btn__add" @click="addActionOperList">Создать действие операции</VButton>
 		</form>
 	</div>
 </template>
@@ -124,6 +126,7 @@ export default {
 					}
 				});
 				alert('Запись успешно сохранена');
+				this.loadActionOperList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

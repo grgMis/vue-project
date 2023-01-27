@@ -7,6 +7,7 @@
 						<th>Заводской номер оборудования</th>
 						<th>Инвентарный номер оборудования</th>
 						<th>Наименование модели оборудования</th>
+						<th>Состояние оборудования</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -14,6 +15,7 @@
 						<td>{{ equip.factory_number }}</td>
 						<td>{{ equip.inventory_number }}</td>
 						<td>{{ equip.equip_model_id.equip_model_name}}</td>
+						<td>{{ equip.equip_state_id.equip_state_name}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -31,7 +33,15 @@
 						{{ equipModel.equip_model_name }}
 					</option>
 			</select>
-			<VButton class="btn__add" @click="addEquip">Добавить оборудование</VButton>
+			<select name="equipState"
+				v-model="selectedEquipState" 
+				@change="this.equipStateId=$event.target.options.selectedIndex">
+					<option disabled value="">Состояние</option>
+					<option v-for="equipState in equipStateList" :key="equipState.equip_state_id">
+						{{ equipState.equip_state_name }}
+					</option>
+			</select>
+			<VButton type="button" class="btn__add" @click="addEquip">Добавить оборудование</VButton>
 		</form>
 	</div>
 </template>
@@ -48,6 +58,9 @@ export default {
 			selectedEquipModel: "",
 			equipModelId: 0,
 			equipModelList: [],
+			selectedEquipState: "",
+			equipStateId: 0,
+			equipStateList: [],
 			equipList: [],
 			dataEquip:
 			{
@@ -75,15 +88,26 @@ export default {
 				console.log('Error');
 			}
 		},
+		async loadEquipStateList() {
+			try {
+				const response = await axios.get('http://localhost:8081/equipState/equipStateAll');
+				this.equipStateList = response.data;
+				console.log(this.equipStateList);
+			} catch(e) {
+				console.log('Error');
+			}
+		},
 		async addEquip() {
 			try {
 				const response = await axios.post('http://localhost:8081/equip', this.dataEquip, {
 					params: 
 					{
-						equip_model_id: this.equipModelId
+						equip_model_id: this.equipModelId,
+						equip_state_id: this.equipStateId
 					}
 				});
 				alert('Запись успешно сохранена');
+				this.loadEquipList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');
@@ -92,6 +116,7 @@ export default {
 	},
 	mounted() {
 		this.loadEquipList();
+		this.loadEquipStateList();
 		this.loadEquipModelList();
 	},
 	components: {

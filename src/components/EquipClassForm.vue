@@ -31,7 +31,7 @@
 						{{ equipCategory.equip_category_name }}
 					</option>
 			</select>
-			<VButton class="btn__add" @click="addEquipClass">Добавить класс оборудования</VButton>
+			<VButton type="button" class="btn__add" @click="addEquipClass">Добавить класс оборудования</VButton>
 		</form>
 	</div>
 </template>
@@ -84,6 +84,7 @@ export default {
 					}
 				});
 				alert('Запись успешно сохранена');
+				this.loadEquipClassList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

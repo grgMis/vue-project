@@ -41,7 +41,7 @@
 						{{ deptType.dept_type_name }}
 					</option>
 			</select>
-			<VButton class="btn__add" @click="addDept">Создать отдел</VButton>
+			<VButton type="button" class="btn__add" @click="addDept">Создать отдел</VButton>
 		</form>
 	</div>
 </template>
@@ -96,6 +96,7 @@ export default {
 					}
 				});
 				alert('Запись успешно сохранена');
+				this.loadDeptList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

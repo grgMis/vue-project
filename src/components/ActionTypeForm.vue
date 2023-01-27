@@ -31,7 +31,7 @@
 						{{ actionGroup.action_group_name }}
 					</option>
 			</select>
-			<VButton class="btn__add" @click="addActionType">Создать тип события</VButton>
+			<VButton type="button" class="btn__add" @click="addActionType">Создать тип события</VButton>
 		</form>
 	</div>
 </template>
@@ -51,8 +51,8 @@ export default {
 			actionTypeList: [],
 			dataActionType: 
 			{
-				action_group_name: "",
-				action_group_sname: ""
+				action_type_name: "",
+				action_type_sname: ""
 			}
 		};
 	},
@@ -84,6 +84,7 @@ export default {
 					}
 				});
 				alert('Запись успешно сохранена');
+				this.loadActionTypeList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

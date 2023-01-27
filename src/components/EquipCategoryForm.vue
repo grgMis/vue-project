@@ -21,7 +21,7 @@
 			<vInput name="equipCategorySname" placeholder="Краткое наименование категории оборудования"
 				 @input="(dataEquipCategory.equip_category_sname = $event.target.value)">
 			</vInput>
-			<VButton class="btn__add" @click="addEquipCategory">Добавить категорию оборудования</VButton>
+			<VButton type="button" class="btn__add" @click="addEquipCategory">Добавить категорию оборудования</VButton>
 		</form>
 	</div>
 </template>
@@ -57,6 +57,7 @@ export default {
 			try {
 				const response = await axios.post('http://localhost:8081/equipCategory', this.dataEquipCategory);
 				alert('Запись успешно сохранена');
+				this.loadEquipCategoryList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

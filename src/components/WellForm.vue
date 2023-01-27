@@ -26,7 +26,7 @@
 						{{ dept.dept_name }}
 					</option>
 			</select>
-			<VButton class="btn__add" @click="addWell">Добавить скважину</VButton>
+			<VButton type="button" class="btn__add" @click="addWell">Добавить скважину</VButton>
 		</form>
 	</div>
 </template>
@@ -78,6 +78,7 @@ export default {
 					}
 				});
 				alert('Запись успешно сохранена');
+				this.loadWellList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

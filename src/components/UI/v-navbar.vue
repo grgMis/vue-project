@@ -1,42 +1,26 @@
 <template>
-	<vDialog v-model:show="dialogVisible">
-		<ActionEquipForm></ActionEquipForm>
-	</vDialog>
 	<div class="navbar">
 		<vButton class="btn" v-b-tooltip.hover title="Главная" @click="goToMain">◄</vButton>
-		<div class="header">Текущее оборудование</div>
-		<div class="navbar__btns">
-			<vButton v-b-tooltip.hover title="Создать запись"
-			@click="showDialog"
-			>✚</vButton>
-		</div>
+		<div class="header">Мониторинг оборудования</div>
 	</div>
 </template>
 
 <script>
 import vButton from './v-button.vue';
-import vDialog from '@/components/UI/v-dialog.vue'
-import ActionEquipForm from '@/components/ActionEquipForm.vue';
 import router from '@/router/router';
 
 export default {
 	components: {
-		vDialog,
-		ActionEquipForm,
 		vButton
 	},
 	name: 'vNavbar',
 	data() {
 		return {
-			dialogVisible: false,
 		}
 	},
 	methods: {
-		showDialog() {
-			this.dialogVisible = true;
-		},
 		goToMain() {
-			router.push('/')
+			router.push('/main')
 		}
 	}
 }
@@ -65,6 +49,7 @@ export default {
 .header {
 	font-weight: bold;
 	font-size: 20px;
+	margin-left: 30px;
 	color: white;
 }
 

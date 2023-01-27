@@ -21,7 +21,7 @@
 			<vInput name="deptTypeSname" placeholder="Краткое наименование типа отдела"
 				 @input="(dataDeptType.dept_type_sname = $event.target.value)">
 			</vInput>
-			<VButton class="btn__add" @click="addDeptType">Создать тип отдел</VButton>
+			<VButton type="button" class="btn__add" @click="addDeptType">Создать тип отдел</VButton>
 		</form>
 	</div>
 </template>
@@ -57,6 +57,7 @@ export default {
 			try {
 				const response = await axios.post('http://localhost:8081/deptType', this.dataDeptType);
 				alert('Запись успешно сохранена');
+				this.loadDeptTypeList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');

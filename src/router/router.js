@@ -1,14 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router"
 import ActionEquip from "@/pages/ActionEquip"
-import Equip from "@/pages/Equip"
+import WellEquip from "@/pages/WellEquip"
 import Well from "@/pages/Well"
 import Action from "@/pages/Action"
 import ActionOper from "@/pages/ActionOper"
 import Main from "@/pages/Main"
+import Auth from "@/pages/Auth"
 
 const routes = [
 	{
 		path: '/',
+		component: Auth
+	},
+	{
+		path: '/main',
 		component: Main
 	},
 	{
@@ -16,8 +21,8 @@ const routes = [
 		component: ActionEquip
 	},
 	{
-		path: '/equip',
-		component: Equip
+		path: '/wellEquip',
+		component: WellEquip
 	},
 	{
 		path: '/well',

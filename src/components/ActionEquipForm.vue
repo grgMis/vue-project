@@ -4,42 +4,18 @@
 			<select name="actionOper"
 				v-model="selectedActionOper"
 				@change="this.actionOperId=$event.target.options.selectedIndex">
-					<option disabled value="">Дата операции</option>
+					<option disabled value="">Действие</option>
 					<option v-for="actionOper in actionOperList" :key="actionOper.action_oper_id">
-						{{ actionOper.action_oper_date }}
+						{{ actionOper.action_id.action_type_id.action_type_name }}
 					</option>
 			</select>
-			<select name="equipClass"
-				v-model="selectedEquipClass"
-				@change="this.equipClassId=$event.target.options.selectedIndex">
-					<option disabled value="">Класс</option>
-					<option v-for="equipClass in equipClassList" :key="equipClass.equip_class_id">
-						{{ equipClass.equip_class_name }}
+			<select name="wellEquip"
+				v-model="selectedWellEquip" 
+				@change="this.wellEquipId=$event.target.options.selectedIndex">
+					<option disabled value="">Оборудование</option>
+					<option v-for="wellEquip in wellEquipList" :key="wellEquip.well_equip_id">
+						{{ wellEquip.equip_id.equip_model_id.equip_model_name }}
 					</option>
-			</select>
-			<select name="equipModel" 
-				v-model="selectedEquipModel" 
-				@change="this.equipModelId=$event.target.options.selectedIndex">
-					<option disabled value="">Модель</option>
-					<option v-for="equipModel in equipModelList" :key="equipModel.equip_model_id">
-						{{ equipModel.equip_model_name }}
-					</option>
-			</select>
-			<select name="equipNumber"
-				v-model="selectedEquipNumber" 
-				@change="this.equipId=$event.target.options.selectedIndex">
-					<option disabled value="">Инв. номер</option>
-					<option v-for="equip in equipList" :key="equip.equip_id">
-						{{ equip.inventory_number }}
-					</option>
-			</select>
-			<select name="equipState"
-				v-model="selectedEquipState" 
-				@change="this.equipStateId=$event.target.options.selectedIndex">
-					<option disabled value="">Состояние</option>
-					<option v-for="equipState in equipStateList" :key="equipState.equip_state_id">
-						{{ equipState.equip_state_name }}
-					</option>	
 			</select>
 			<vInput name="equipCount" placeholder="Количество оборудования"
 				 @input="(dataActionEquip.equip_count = $event.target.value)">
@@ -77,19 +53,10 @@ export default {
 		return {
 			selectedActionOper: "",
 			actionOperId: 0,
-			selectedEquipClass: "",
-			equipClassId: 0,
-			selectedEquipModel: "",
-			equipModelId: 0,
-			selectedEquipNumber: "",
-			equipId: 0,
-			selectedEquipState: "",
-			equipStateId: 0,
+			selectedWellEquip: "",
+			wellEquipId: 0,
 			actionOperList: [],
-			equipClassList: [],
-			equipModelList: [],
-			equipList: [],
-			equipStateList: [],
+			wellEquipList: [],
 			dataActionEquip:
 				{
 					equip_count: 0,
@@ -110,38 +77,11 @@ export default {
 				console.log('Error');
 			}
 		},
-		async loadEquipClassList() {
+		async loadWellEquipList() {
 			try {
-				const response = await axios.get('http://localhost:8081/equipClass/equipClassAll');
-				this.equipClassList = response.data;
-				console.log(this.equipClassList);
-			} catch(e) {
-				console.log('Error');
-			}
-		},
-		async loadEquipModelList() {
-			try {
-				const response = await axios.get('http://localhost:8081/equipModel/equipModelAll');
-				this.equipModelList = response.data;
-				console.log(this.equipModelList);
-			} catch(e) {
-				console.log('Error');
-			}
-		},
-		async loadEquipList() {
-			try {
-				const response = await axios.get('http://localhost:8081/equip/equipAll');
-				this.equipList = response.data;
-				console.log(this.equipList);
-			} catch(e) {
-				console.log('Error');
-			}
-		},
-		async loadEquipStateList() {
-			try {
-				const response = await axios.get('http://localhost:8081/equipState/equipStateAll');
-				this.equipStateList = response.data;
-				console.log(this.equipStateList);
+				const response = await axios.get('http://localhost:8081/wellEquip/wellEquipAll');
+				this.wellEquipList = response.data;
+				console.log(this.wellEquipList);
 			} catch(e) {
 				console.log('Error');
 			}
@@ -152,10 +92,7 @@ export default {
 					params: 
 					{
 						action_oper_id: this.actionOperId,
-						equip_class_id: this.equipClassId,
-						equip_model_id: this.equipModelId,
-						equip_id: this.equipId,
-						equip_state_id: this.equipStateId
+						well_equip_id: this.wellEquipId,
 					}
 				});
 				alert('Запись успешно сохранена');
@@ -166,10 +103,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.loadEquipClassList();
-		this.loadEquipModelList();
-		this.loadEquipList();
-		this.loadEquipStateList();
+		this.loadWellEquipList();
 		this.loadActionOperList();
 	}
 }

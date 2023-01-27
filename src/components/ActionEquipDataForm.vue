@@ -33,14 +33,17 @@
 						{{ equip.inventory_number }}
 					</option>
 			</select>
-			<select name="equipState"
-				v-model="selectedEquipState" 
-				@change="this.equipStateId=$event.target.options.selectedIndex">
-					<option disabled value="">Состояние</option>
-					<option v-for="equipState in equipStateList" :key="equipState.equip_state_id">
-						{{ equipState.equip_state_name }}
-					</option>	
-			</select>
+			<div>
+				<select name="equipState"
+					v-model="selectedEquipState" 
+					@change="this.equipStateId=$event.target.options.selectedIndex">
+						<option disabled value="">Состояние</option>
+						<option v-for="equipState in equipStateList" :key="equipState.equip_state_id">
+							{{ equipState.equip_state_name }}
+						</option>
+				</select>
+				<vButton class="btn__add" @click="updateEquipState(this.idActionEquip, this.equipStateId)" v-b-tooltip.hover title="Сохранить">✔</vButton>
+			</div>
 			<h4>Количество оборудования</h4>
 			<vInput name="equipCount" placeholder="Количество оборудования"
 				v-model="dataOneActionEquip.equip_count"
@@ -91,6 +94,9 @@ export default {
 	},
 	data() {
 		return {
+			equipStateList: [],
+			selectedEquipState: "",
+			equipStateId: 0,
 			actionEquipList: [],
 			dataActionEquip:
 			{
@@ -104,6 +110,15 @@ export default {
 		}
 	},
 	methods: {
+		async loadEquipStateList() {
+			try {
+				const response = await axios.get("http://localhost:8081/equipState/equipStateAll");
+				this.equipStateList = response.data;
+				console.log(this.equipStateList);
+			} catch (e) {
+				console.log("Error");
+			}
+		},
 		async getActionEquipData(idActionEquip) {
 			try {
 				const response = await axios.get('http://localhost:8081/actionEquip/'+idActionEquip);
@@ -122,9 +137,19 @@ export default {
 				console.log('Error');
 			}
 		},
+		async updateEquipState(idActionEquip, idEquipState) {
+			try {
+				const response = await axios.put(`http://localhost:8081/actionEquip/updateActionEquip?action_equip_id=${idActionEquip}&equip_state_id=${idEquipState}`);
+				alert('Запись успешно изменена');
+			} catch(e) {
+				console.log('Error');
+				alert('Заполните поля для изменения!');
+			}
+		},
 	},
 	mounted() {
 		this.getActionEquipData(this.idActionEquip);
+		this.loadEquipStateList();
 	}
 }
 </script>

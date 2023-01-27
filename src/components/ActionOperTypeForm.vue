@@ -21,7 +21,7 @@
 			<vInput name="actionOperTypeSname" placeholder="Краткое наименование типа действия операции"
 				 @input="(dataActionOperTypeList.action_oper_type_sname = $event.target.value)">
 			</vInput>
-			<VButton class="btn__add" @click="addActionOperType">Создать тип действия операции</VButton>
+			<VButton type="button" class="btn__add" @click="addActionOperType">Создать тип действия операции</VButton>
 		</form>
 	</div>
 </template>
@@ -57,6 +57,7 @@ export default {
 			try {
 				const response = await axios.post('http://localhost:8081/actionOperType', this.dataActionOperTypeList);
 				alert('Запись успешно сохранена');
+				this.loadActionOperTypeList();
 			} catch (e) {
 				alert('Заполните поля для добавления!');
 				console.log('Error');
