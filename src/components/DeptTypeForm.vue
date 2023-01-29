@@ -98,7 +98,7 @@ font-size: 20px;
 
 table {
 padding: 5px;
-margin-left: 30px;
+margin-left: 80px;
 max-width: auto;
 }
 

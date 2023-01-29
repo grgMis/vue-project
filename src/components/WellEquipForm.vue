@@ -131,7 +131,7 @@ font-size: 18px;
 
 table {
 padding: 5px;
-margin-left: 5px;
+margin-left: 50px;
 max-width: auto;
 }
 

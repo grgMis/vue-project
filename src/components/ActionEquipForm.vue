@@ -4,7 +4,7 @@
 			<select name="actionOper"
 				v-model="selectedActionOper"
 				@change="this.actionOperId=$event.target.options.selectedIndex">
-					<option disabled value="">Действие</option>
+					<option disabled value="">Операции</option>
 					<option v-for="actionOper in actionOperList" :key="actionOper.action_oper_id">
 						{{ actionOper.action_id.action_type_id.action_type_name }}
 					</option>

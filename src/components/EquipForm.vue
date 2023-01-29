@@ -1,4 +1,7 @@
 <template>
+		<VDialog v-model:show="dialogUpdateVisible">
+			<EquipDataForm :idEquip = "this.selectedIdEquip"></EquipDataForm>
+		</VDialog>
 	<div class="action__form">
 		<form class="form">
 			<table class="table" cellpadding="0" cellspacing="0">
@@ -8,6 +11,7 @@
 						<th>Инвентарный номер оборудования</th>
 						<th>Наименование модели оборудования</th>
 						<th>Состояние оборудования</th>
+						<th>Действие</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -16,6 +20,16 @@
 						<td>{{ equip.inventory_number }}</td>
 						<td>{{ equip.equip_model_id.equip_model_name}}</td>
 						<td>{{ equip.equip_state_id.equip_state_name}}</td>
+						<td>
+							<div class="td__btns">
+								<VButton class="btns" type="button" 
+								@click="deleteEquip(equip.equip_id)" 
+								v-b-tooltip.hover title="Удалить запись">✖</VButton>
+								<VButton type="button" class="btns" 
+								@click="this.selectedIdEquip=getIdEquip(equip)" 
+								v-b-tooltip.hover title="Редактирование">✎</VButton>
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -48,13 +62,17 @@
 
 <script>
 import axios from 'axios';
+import EquipDataForm from './EquipDataForm.vue';
 import VButton from './UI/v-button.vue';
+import VDialog from './UI/v-dialog.vue';
 import vInput from './UI/v-input.vue';
 
 export default {
 	name: 'EquipForm',
 	data() {
 		return {
+			selectedIdEquip: 0,
+			dialogUpdateVisible: false,
 			selectedEquipModel: "",
 			equipModelId: 0,
 			equipModelList: [],
@@ -70,6 +88,10 @@ export default {
 		};
 	},
 	methods: {
+		getIdEquip(equip){
+			this.dialogUpdateVisible = true;
+			return equip.equip_id;
+		},
 		async loadEquipList() {
 			try {
 				const response = await axios.get('http://localhost:8081/equip/equipAll');
@@ -113,6 +135,22 @@ export default {
 				console.log('Error');
 			}
 		},
+		async deleteEquip(equip_id) {
+            try {
+                if (confirm("Удалить выбранную запись?")){
+					alert("Запись успешно удалена");
+					const response = await axios.delete("http://localhost:8081/equip/"+equip_id);
+					this.loadEquipList();
+				} else {
+					alert("Удаление отменено");
+					this.loadEquipList();
+				}
+            }
+            catch (e) {
+                alert("Ошибка удаления");
+                console.log("Error");
+            }
+        }
 	},
 	mounted() {
 		this.loadEquipList();
@@ -120,9 +158,11 @@ export default {
 		this.loadEquipModelList();
 	},
 	components: {
-		VButton,
-		vInput
-	}
+    VButton,
+    vInput,
+    EquipDataForm,
+    VDialog
+}
 }
 </script>
 

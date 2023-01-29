@@ -114,7 +114,7 @@ font-family: Arial, Helvetica, sans-serif;
 
 table {
 padding: 5px;
-margin-left: 90px;
+margin-left: 200px;
 max-width: auto;
 }
 

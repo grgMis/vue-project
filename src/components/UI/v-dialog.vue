@@ -45,7 +45,7 @@ export default {
 	margin: auto;
 	background: white;
 	border-radius: 12px;
-	width: 600px;
+	width: 700px;
 	padding: 20px;
 	text-align: center;
 }

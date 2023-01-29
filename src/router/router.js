@@ -4,7 +4,8 @@ import WellEquip from "@/pages/WellEquip"
 import Well from "@/pages/Well"
 import Action from "@/pages/Action"
 import ActionOper from "@/pages/ActionOper"
-import Main from "@/pages/Main"
+import MainAdmin from "@/pages/MainAdmin"
+import MainOperator from "@/pages/MainOperator"
 import Auth from "@/pages/Auth"
 
 const routes = [
@@ -13,8 +14,12 @@ const routes = [
 		component: Auth
 	},
 	{
-		path: '/main',
-		component: Main
+		path: '/mainOperator',
+		component: MainOperator
+	},
+	{
+		path: '/mainAdmin',
+		component: MainAdmin
 	},
 	{
 		path: '/actionEquip',

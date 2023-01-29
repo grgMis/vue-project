@@ -5,58 +5,62 @@
 		<vDialog v-model:show="dialogAddVisible">
 			<ActionEquipForm></ActionEquipForm>
 		</vDialog>
-	<div class="actions__form">
-		<label class="header">Текущий ремонт</label>
-		<select name="wellName"
-			v-model="selectedWellName" 
-			@change="wellId=$event.target.options.selectedIndex">
-				<option disabled value="">Скважина</option>
-				<option v-for="well in wellList" :key="well.well_id">
-					{{ well.well_name }}
-				</option>
-		</select>
-		<VButton class="btns" @click="filterWell" v-b-tooltip.hover title="Фильтр по скважине">✔</VButton>
-		<VButton class="btns" @click="showDialog" v-b-tooltip.hover title="Добавить">✚</VButton>
-	</div>
-	<div class="table__style">
-		<table class="table" cellpadding="0" cellspacing="0">
-			<thead>
-				<tr>
-					<th @click="sortByWellName">Номер скважины</th>
-					<th>Модель оборудование</th>
-					<th>Категория оборудование</th>
-					<th>Класс оборудования</th>
-					<th>Инвентарный номер</th>
-					<th>Тип операции</th>
-					<th>Вид операции</th>
-					<th>Группа операции</th>
-					<th @click="sortByData" v-b-tooltip.hover title="Сортировать">Дата действия
-					</th>
-					<th>Дата завершения действия</th>
-					<th>Действие</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr v-for="actionEquip in actionEquipList" :key="actionEquip.action_equip_id">
-					<td>{{ actionEquip.well_equip_id.well_id.well_name }}</td>
-					<td>{{ actionEquip.well_equip_id.equip_id.equip_model_id.equip_model_name }}</td>
-					<td>{{ actionEquip.well_equip_id.equip_id.equip_model_id.equip_class_id.equip_category_id.equip_category_name }}</td>
-					<td>{{ actionEquip.well_equip_id.equip_id.equip_model_id.equip_class_id.equip_class_name }}</td>
-					<td>{{ actionEquip.well_equip_id.equip_id.inventory_number }}</td>
-					<td>{{ actionEquip.action_oper_id.action_oper_type_id.action_oper_type_name }}</td>
-					<td>{{ actionEquip.action_oper_id.action_id.action_type_id.action_type_name }}</td>
-					<td>{{ actionEquip.action_oper_id.action_id.action_type_id.action_group_id.action_group_name}}</td>
-					<td>{{ actionEquip.action_oper_id.action_id.action_date_begin }}</td>
-					<td>{{ actionEquip.action_oper_id.action_id.action_date_end }}</td>
-					<td>
-						<div class="td__btns">
-							<VButton class="btns" @click="deleteActionEquip(actionEquip.action_equip_id)" v-b-tooltip.hover title="Удалить запись">✖</VButton>
-							<VButton class="btns" @click="this.selectedIdActionEquip=getIdActionEquip(actionEquip)" v-b-tooltip.hover title="Редактирование">✎</VButton>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="app">
+		<div class="actions__form">
+			<label class="header">Текущий ремонт</label>
+			<select name="wellName"
+				v-model="selectedWell" 
+				:value="selectedWell"
+				@change="wellId=$event.target.options.selectedIndex">
+					<option disabled value="">Скважина</option>
+					<option v-for="well in wellList" :key="well.well_id">
+						{{ well.well_name }}
+					</option>
+			</select>
+			<VButton class="btns" @click="loadList" v-b-tooltip.hover title="Обновить">⭮</VButton>
+			<VButton class="btns" @click="showDialog" v-b-tooltip.hover title="Добавить">✚</VButton>
+		<button class="btn" onclick="javascrip:window.print()">Печать</button>
+		</div>
+		<div class="table__style">
+			<table class="table print" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th @click="sortByWellName">Номер скважины</th>
+						<th>Модель оборудование</th>
+						<th>Категория оборудование</th>
+						<th>Класс оборудования</th>
+						<th>Инвентарный номер</th>
+						<th>Тип операции</th>
+						<th>Вид операции</th>
+						<th>Группа операции</th>
+						<th @click="sortByData" v-b-tooltip.hover title="Сортировать">Дата действия
+						</th>
+						<th>Дата завершения действия</th>
+						<th>Действие</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="actionEquip in filterByWell" :key="actionEquip.action_equip_id">
+						<td>{{ actionEquip.well_equip_id.well_id.well_name }}</td>
+						<td>{{ actionEquip.well_equip_id.equip_id.equip_model_id.equip_model_name }}</td>
+						<td>{{ actionEquip.well_equip_id.equip_id.equip_model_id.equip_class_id.equip_category_id.equip_category_name }}</td>
+						<td>{{ actionEquip.well_equip_id.equip_id.equip_model_id.equip_class_id.equip_class_name }}</td>
+						<td>{{ actionEquip.well_equip_id.equip_id.inventory_number }}</td>
+						<td>{{ actionEquip.action_oper_id.action_oper_type_id.action_oper_type_name }}</td>
+						<td>{{ actionEquip.action_oper_id.action_id.action_type_id.action_type_name }}</td>
+						<td>{{ actionEquip.action_oper_id.action_id.action_type_id.action_group_id.action_group_name}}</td>
+						<td>{{ actionEquip.action_oper_id.action_id.action_date_begin }}</td>
+						<td>{{ actionEquip.action_oper_id.action_id.action_date_end }}</td>
+						<td>
+							<div class="td__btns">
+								<VButton class="btns" @click="deleteActionEquip(actionEquip.action_equip_id)" v-b-tooltip.hover title="Удалить запись">✖</VButton>
+								<VButton class="btns" @click="this.selectedIdActionEquip=getIdActionEquip(actionEquip)" v-b-tooltip.hover title="Редактирование">✎</VButton>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </template>
 
@@ -75,31 +79,29 @@ export default {
 			dialogVisible: false,
             actionEquipList: [],
 			wellList: [],
-			selectedWellName: "",
 			wellId: 0,
+			selectedWell: "",
+			wellListId: 0,
+			dateBegin: "",
+			dateEnd: "",
 			dialogUpdateVisible: false,
 			dialogAddVisible: false
-
         };
     },
     methods: {
 		showDialog() {
 			this.dialogAddVisible = true;
 		},
-		filterWell() {
-			return this.actionEquipList
-				.filter(actionEquipList => {
-					return actionEquipList.well_equip_id.well_id.well_name === this.selectedWellName;
-				})
-		},
 		sortByData() {
-			this.actionEquipList.sort((a, b) => a.action_oper_id.action_id.action_date_begin.localeCompare(b.action_oper_id.action_id.action_date_begin));
+			this.actionEquipList.sort((a, b) => a.action_oper_id.action_id.action_date_begin.
+			localeCompare(b.action_oper_id.action_id.action_date_begin));
 		},
 		sortByWellName() {
-			this.actionEquipList.sort((a, b) => a.well_equip_id.well_id.well_name.localeCompare(b.well_equip_id.well_id.well_name));
+			this.actionEquipList.sort((a, b) => a.well_equip_id.well_id.well_name.
+			localeCompare(b.well_equip_id.well_id.well_name));
 		},
 		getIdActionEquip(actionEquip){
-			this.dialogUpdateVisible = true;
+			this.dialogUpdateVisible = true;из
 			return actionEquip.action_equip_id;
 		},
         async loadActionEquipList() {
@@ -136,21 +138,30 @@ export default {
                 alert("Ошибка удаления");
                 console.log("Error");
             }
-        }
+        },
+		loadList() {
+			this.selectedWell = "";
+		}
     },
     mounted() {
 		this.loadWellList();
         this.loadActionEquipList();
     },
 	computed: {
-		
+		filterByWell() {
+			if (this.selectedWell === "") {
+				return this.actionEquipList;
+			} else {
+				return this.actionEquipList.filter(p => p.well_equip_id.well_id.well_name === this.selectedWell);
+			}
+		},
 	},
     components: {
     VButton,
     vDialog,
     ActionEquipDataForm,
-	ActionEquipForm,
-    VInput
+    ActionEquipForm,
+    VInput,
 }
 }
 </script>
@@ -176,12 +187,21 @@ select {
 	font-weight: bold;
 }
 
+.btn {
+	padding: 10px 15px;
+	margin: 10px;
+	background: none;
+	color: black;
+	border: 1px solid black;
+	color: black;
+}
+
 .header {
 	font-size: 25px;
 	font-weight: bold;
 	orientation: right;
 	margin-left: 20px;
-	margin-right: 1350px;
+	margin-right: 1250px;
 }
 
  .actions__form {
@@ -230,6 +250,15 @@ select {
  .td__btns {
 	display: flex;
 	justify-content: space-between;
+ }
+
+ @media print {
+	.app {
+		visibility: hidden;
+	}
+	.print {
+		visibility: visible;
+	}
  }
  
 </style>

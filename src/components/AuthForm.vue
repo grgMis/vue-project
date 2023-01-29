@@ -5,8 +5,10 @@
 			<vInput class="input" name="userDataLogin" placeholder="Логин"
 				 @input="(this.login = $event.target.value)">
 			</vInput>
-			<vInput class="input secondInput" id="passwordInput" name="userDataPassword" type="text" placeholder="Пароль"
-				 @input="(this.password = $event.target.value)">
+			<vInput class="input secondInput" id="passwordInput" 
+					name="userDataPassword" 
+					type="text" placeholder="Пароль"
+				 	@input="(this.password = $event.target.value)">
 			</vInput>
 			<VButton type="button" class="btn" @click="authUser($router)">Авторизоваться</VButton>
 		</form>
@@ -49,9 +51,9 @@ export default {
 				alert('Заполните все поля!');
 			} else if (this.checkUser.length === 1) {
 				if (this.login === 'admin') {
-					router.push('/main');
+					router.push('/mainAdmin');
 				} else {
-					alert('Функция оператора');
+					router.push('/mainOperator');
 				}
 			} else {
 				alert('Пользователь не найден!')
@@ -80,18 +82,6 @@ font-family: Arial, Helvetica, sans-serif;
 	margin: 15px;
 }
 
-.label {
-	font-weight: bold;
-}
-
-select {
-	width: 160px;
-	border: 1px solid black;
-	padding: 10px 15px;
-	margin-top: 15px;
-	margin: 10px;
-	font-weight: bold;
-}
 .form {
 	margin-top: 30px;
 	text-align: center;

@@ -64,36 +64,42 @@
 		<UserDataForm></UserDataForm>
 	</VDialog>
 	<div class="app">
-		<h1>Добро пожаловать!</h1>
-		<h2>Выберите таблицу для взаимодействия</h2>
-		<div class="links">
-			<VButton class="btns" @click="goToActionEquip">Текущий ремонт</VButton>
-			<VButton class="btns" @click="goToWellEquip">Оборудование скважин</VButton>
-			<VButton class="btns">
-				<RouterLink to="/well">СкважиныTEST</RouterLink>
-			</VButton>
-			<VButton class="btns">
-				<RouterLink to="/action">ДействияTEST</RouterLink>
-			</VButton>
-			<VButton class="btns">
-				<RouterLink to="/actionOper">ОперацииTEST</RouterLink>
-			</VButton>
-			<VButton class="btns" @click="showActionForm">Действия[C]</VButton>
-			<VButton class="btns" @click="showActionGroupForm">Группы действий[C]</VButton>
-			<VButton class="btns" @click="showActionTypeForm">Типы действий[C]</VButton>
-			<VButton class="btns" @click="showActionOperTypeForm">Виды операций[C]</VButton>
-			<VButton class="btns" @click="showActionOperForm">Операции[C]</VButton>
-			<VButton class="btns" @click="showDeptTypeForm">Типы подразделений[C]</VButton>
-			<VButton class="btns" @click="showDeptForm">Подразделения[C]</VButton>
-			<VButton class="btns" @click="showEquipStateForm">Состояния оборудования[C]</VButton>
-			<VButton class="btns" @click="showEquipCategoryForm">Категории оборудования[C]</VButton>
-			<VButton class="btns" @click="showEquipClassForm">Классы оборудования[C]</VButton>
-			<VButton class="btns" @click="showEquipModelForm">Модели оборудования[C]</VButton>
-			<VButton class="btns" @click="showEquipForm">Оборудование[C]</VButton>
-			<VButton class="btns" @click="showWellForm">Скважины[C]</VButton>
-			<VButton class="btns" @click="showHangerTypeForm">Типы подвесок[C]</VButton>
-			<VButton class="btns" @click="showWellEquipForm">Оборудование скважин[C]</VButton>
-			<VButton class="btns" @click="showUserDataForm">Пользователи[C]</VButton>
+		<h1>Добро пожаловать! Пользователь: Администратор</h1>
+		<h2>Выберите таблицу для взаимодействия:</h2>
+		<div class="tables">
+			<div class="table__block" id="block__action">
+				<h3>Ремонт оборудования:</h3>
+				<VButton class="btns" @click="goToActionEquip">Текущий ремонт</VButton>
+				<VButton class="btns" @click="showActionForm">Действия[C]</VButton>
+				<VButton class="btns" @click="showActionOperForm">Операции[C]</VButton>
+			</div>
+			<div class="table__block">
+				<h3>Оборудование:</h3>
+				<VButton class="btns" @click="goToWellEquip">Оборудование скважин</VButton>
+				<VButton class="btns" @click="showEquipForm">Оборудование[C]</VButton>
+				<VButton class="btns" @click="showEquipStateForm">Состояния оборудования[C]</VButton>
+				<VButton class="btns" @click="showEquipCategoryForm">Категории оборудования[C]</VButton>
+				<VButton class="btns" @click="showEquipClassForm">Классы оборудования[C]</VButton>
+				<VButton class="btns" @click="showEquipModelForm">Модели оборудования[C]</VButton>
+			</div>
+			<div class="table__block" id="block__well">
+				<h3>Скважины:</h3>
+				<VButton class="btns" @click="showWellEquipForm">Оборудование скважин[C]</VButton>
+				<VButton class="btns" @click="showWellForm">Скважины[C]</VButton>
+			</div>
+			<div class="table__block">
+				<h3>Справочники:</h3>
+				<VButton class="btns" @click="showActionGroupForm">Группы действий[C]</VButton>
+				<VButton class="btns" @click="showActionTypeForm">Типы действий[C]</VButton>
+				<VButton class="btns" @click="showActionOperTypeForm">Виды операций[C]</VButton>
+				<VButton class="btns" @click="showDeptTypeForm">Типы подразделений[C]</VButton>
+				<VButton class="btns" @click="showDeptForm">Подразделения[C]</VButton>
+				<VButton class="btns" @click="showHangerTypeForm">Типы подвесок[C]</VButton>
+			</div>
+			<div class="table__block" id="block__user">
+				<h3>Пользователи:</h3>
+				<VButton class="btns" @click="showUserDataForm">Пользователи[C]</VButton>
+			</div>
 		</div>
 	</div>
 </template>
@@ -227,23 +233,53 @@ margin: 0px;
 font-family: Arial, Helvetica, sans-serif;
 }
 
+h3 {
+	margin-bottom: 10px;
+}
+
 h4 {
 	font-size: 30px;
 }
+
+#block__action {
+	height: 170px;
+}
+
+#block__well {
+	height: 170px;
+}
+
+#block__user {
+	height: 110px;
+}
+
 .app {
 	align-items: center;
 	margin-left: 100px;
 	margin-top: 15px;
 }
-.links {
-	display: fixed;
-	justify-content: space-around;
-}
-
 .btns {
 	color: black;
 	border: 1px solid black;
 	cursor: pointer;
+}
+
+.table__block {
+	margin: 20px;
+	padding: 10px;
+	width: 300px;
+	height: 400px;
+	text-align: center;
+	float: left;
+	border: 1px solid black;
+}
+
+.tables {
+	margin-left: -40px;
+	height: 300px;
+	width: 1900px;
+	float: left;
+	justify-content: space-around;
 }
 
 </style>

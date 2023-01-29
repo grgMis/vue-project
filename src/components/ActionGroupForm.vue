@@ -98,6 +98,7 @@ font-size: 20px;
 
 table {
 padding: 5px;
+margin-left: 50px;
 max-width: auto;
 }
 

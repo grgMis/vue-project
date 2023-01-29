@@ -1,7 +1,7 @@
 <template>
 	<div class="navbar">
-		<vButton class="btn" v-b-tooltip.hover title="Главная" @click="goToMain">◄</vButton>
 		<div class="header">Мониторинг оборудования</div>
+		<vButton class="btn btn__auth" v-b-tooltip.hover title="Выйти" @click="goToAuth">Выйти</vButton>
 	</div>
 </template>
 
@@ -19,8 +19,10 @@ export default {
 		}
 	},
 	methods: {
-		goToMain() {
-			router.push('/main')
+		goToAuth() {
+			if (confirm("Вы точно хотите выйти?")){
+					router.push('/');
+				}
 		}
 	}
 }
@@ -40,20 +42,21 @@ export default {
 	padding: 0px 15px;
 }
 
-.navbar__btns {
-	margin-left: auto;
-	font-weight: bold;
-	font-size: 15px;
-}
-
 .header {
 	font-weight: bold;
 	font-size: 20px;
-	margin-left: 30px;
+	margin-left: 15px;
 	color: white;
 }
 
 .btn {
+	font-weight: bold;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.btn__auth {
+	margin-left: auto;
 	font-weight: bold;
 	font-size: 15px;
 }

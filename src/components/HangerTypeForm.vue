@@ -93,7 +93,7 @@ font-size: 20px;
 table {
 padding: 5px;
 max-width: auto;
-margin-left: 170px;
+margin-left: 200px;
 }
 
 .table th {
